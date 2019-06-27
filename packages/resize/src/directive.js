@@ -72,7 +72,6 @@ resizeDirective.install = Vue => {
             this.isInit = false;
             return;
           }
-
           const elmRect = JSON.parse(
             JSON.stringify(this.elm.getClientRects()[0])
           );
@@ -93,11 +92,13 @@ resizeDirective.install = Vue => {
         }
       }.bind(vnode);
 
-      addResizeListener(el, vnode.callback());
-
       if (!binding.modifiers || !binding.modifiers.quiet) {
-        vnode.callback();
+        if (vnode.isInit) {
+          vnode.isInit = false;
+          vnode.callback();
+        }
       }
+      addResizeListener(el, vnode.callback());
     },
 
     unbind: function(el, binding, vnode) {
