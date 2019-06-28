@@ -102,7 +102,7 @@ resizeDirective.install = Vue => {
     },
 
     unbind: function(el, binding, vnode) {
-      removeResizeListener(el, vnode.callback());
+      removeResizeListener(el, vnode.callback || vnode.callback());
     }
   });
 };

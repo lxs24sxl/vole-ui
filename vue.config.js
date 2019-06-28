@@ -1,4 +1,5 @@
 const path = require("path");
+const { version } = require("./package.json");
 
 function resolve(dir) {
   return path.join(__dirname, dir);
@@ -56,5 +57,14 @@ module.exports = {
       .set("vole-ui", resolve("src"))
 
       .set("vue$", "vue/dist/vue.esm.js");
+
+    config.plugin("define").tap(([options = {}]) => {
+      return [
+        {
+          ...options, // these are the env variables from your .env file, if any arr defined
+          "process.env.VERSION": JSON.stringify(version)
+        }
+      ];
+    });
   }
 };

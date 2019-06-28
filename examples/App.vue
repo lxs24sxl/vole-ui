@@ -2,16 +2,24 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
 
-    <vo-resize @resize="test2" :immediate="false" type="throttle" delay="600">
+    <vo-resize
+      v-if="rerender"
+      @resize="test2"
+      :immediate="false"
+      type="throttle"
+      delay="600"
+    >
       <div style="margin: 0 10px;">{{ rect2 }}</div>
     </vo-resize>
 
     <HelloWorld
+      v-else
       v-resize.quiet="test"
       vue-resize-type="debounce"
       vue-resize-delay="600"
       msg="Welcome to Your Vue.js App"
     />
+    <a @click="handleClickEvent">test</a>
     {{ rect }}
   </div>
 </template>
@@ -27,7 +35,8 @@ export default {
   data() {
     return {
       rect: {},
-      rect2: {}
+      rect2: {},
+      rerender: false
     };
   },
   methods: {
@@ -36,6 +45,9 @@ export default {
     },
     test2(el, rect) {
       this.rect2 = rect;
+    },
+    handleClickEvent() {
+      this.rerender = !this.rerender;
     }
   }
 };
