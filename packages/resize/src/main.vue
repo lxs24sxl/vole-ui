@@ -74,8 +74,8 @@ export default {
 
         if (elm) {
           const elmRect = JSON.parse(JSON.stringify(elm.getClientRects()[0]));
+          this.$emit("resize", elm, elmRect, this.rect);
           this.rect = elmRect;
-          this.$emit("resize", elm, this.rect);
         }
       }.bind(this);
 

@@ -11,7 +11,6 @@
     >
       <div style="margin: 0 10px;">{{ rect2 }}</div>
     </vo-resize>
-
     <HelloWorld
       v-else
       v-resize.quiet="test"

@@ -22,7 +22,8 @@
 export default {
   data () {
     return {
-      rect: {}
+      rect: {},
+      oldRect: {}
     }
   },
 
@@ -31,9 +32,11 @@ export default {
      * 监听节点事件
      * @parmas {DOM} el 当前节点
      * @params {Object} rect 节点属性
+     * @params {Object} oldRect 变化前的节点属性
      */
-    handleResizeEvent(el, rect) {
+    handleResizeEvent(el, rect, oldRect) {
       this.rect = rect
+      this.oldRect = oldRect
     }
   }
 }
@@ -70,7 +73,8 @@ export default {
 export default {
   data () {
     return {
-      rect: {}
+      rect: {},
+      oldRect: {}
     }
   },
 
@@ -78,10 +82,11 @@ export default {
     /**
      * 监听节点事件
      * @parmas {DOM} el 当前节点
-     * @params {Object} rect 节点属性
+     * @params {Object} oldRect 变化前的节点属性
      */
-    handleResizeEvent(el, rect) {
+    handleResizeEvent(el, rect, oldRect) {
       this.rect = rect
+      this.oldRect = oldRect
     }
   }
 }
@@ -100,4 +105,4 @@ export default {
 
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
-| resize  | 节点改变后回调方法 | el(当前节点)/rect(节点属性) |
+| resize  | 节点改变后回调方法 | el(当前节点)/rect(节点属性)/oldRect(旧节点属性) |

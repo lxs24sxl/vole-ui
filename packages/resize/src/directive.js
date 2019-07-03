@@ -63,7 +63,7 @@ resizeDirective.install = Vue => {
       const cb = binding.value;
 
       vnode.isInit = true;
-
+      vnode.elmRect = {};
       const { delay, type } = getResizeOptions(el, vnode);
 
       vnode.callback = function() {
@@ -76,7 +76,8 @@ resizeDirective.install = Vue => {
             JSON.stringify(this.elm.getClientRects()[0])
           );
           if (elmRect) {
-            cb(this.elm, elmRect);
+            cb(this.elm, elmRect, this.elmRect);
+            vnode.elmRect = elmRect;
           }
         }.bind(vnode);
 
