@@ -6,12 +6,13 @@
   "author": "lxs24sxl",
   "email": "lxs24sxl@gmail.com",
   "license": "MIT",
-  "main": "lib/vole-ui.umd.min.js",
+  "main": "lib/vole-ui.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name vole-ui --dest lib src/index.js"
+    "lib": "vue-cli-service build --target lib --name vole-ui --dest lib src/index.js",
+    "lib:bin": "node ./bin/lib-all.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,9 @@
     "vue",
     "components"
   ],
+  "bin": {
+    "lib-all": "bin/lib-all.js"
+  },
   "dependencies": {
     "core-js": "^2.6.5",
     "resize-observer-polyfill": "^1.5.1",

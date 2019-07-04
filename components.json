@@ -1,0 +1,4 @@
+{
+  "resize": "./packages/resize/index.js",
+  "button": "./packages/button/index.js"
+}

@@ -20,6 +20,7 @@
     />
     <a @click="handleClickEvent">test</a>
     {{ rect }}
+    <vo-button></vo-button>
   </div>
 </template>
 

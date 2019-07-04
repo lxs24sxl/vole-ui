@@ -1,6 +1,7 @@
 import Resize from "../packages/resize/index.js";
+import VoButton from "../packages/button/index.js";
 
-const components = [];
+const components = [VoButton];
 
 const install = function(Vue, opts = {}) {
   components.forEach(component => {
@@ -18,10 +19,11 @@ if (typeof window !== "undefined" && window.Vue) {
   install(window.Vue);
 }
 
-export { Resize };
+export { Resize, VoButton };
 
 export default {
   version: process.env.VERSION,
   install,
-  Resize
+  Resize,
+  VoButton
 };
