@@ -29,7 +29,7 @@ async function syncExex(name = '', path = '') {
   }
   let result = { name, path, num: 1, message: 'success' };
 
-  const shell = `vue-cli-service build --target lib --name ${name} --dest lib ${path} --formats commonjs`;
+  const shell = `vue-cli-service build --no-clean --target lib --name ${name} --dest lib ${path} --formats commonjs`;
 
   console.log("\033[33m[start]: " + shell)
   console.log("\033[0m");
@@ -63,7 +63,7 @@ async function runLibComponent() {
     let result = await syncExex(name, path);
     resultList.push(result);
   }
-  
+
   const success = resultList.filter(item => item.num);
   const fail = resultList.filter(item => !item.num);
 
