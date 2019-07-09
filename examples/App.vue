@@ -20,7 +20,13 @@
     />
     <a @click="handleClickEvent">test</a>
     {{ rect }}
-    <button class="test" v-longpress="testLongpress">test</button>
+    <button
+      class="test"
+      v-longpress="testLongpress"
+      vue-longpress-duration="1000"
+    >
+      test
+    </button>
   </div>
 </template>
 

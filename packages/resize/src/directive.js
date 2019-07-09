@@ -2,14 +2,12 @@ import {
   addResizeListener,
   removeResizeListener
 } from "vole-ui/utils/resize-event";
-import { isHtmlElement, isUndefined, isDefined } from "vole-ui/utils/types";
+
+import { getAttributeMap } from "vole-ui/utils/attributes";
+
 import { throttle, debounce } from "throttle-debounce";
 
 const resizeDirective = {};
-
-const entries = obj => {
-  return Object.keys(obj || {}).map(key => [key, obj[key]]);
-};
 
 // const scope = "VoResize";
 const attributes = {
@@ -23,38 +21,6 @@ const attributes = {
   }
 };
 
-const getResizeOptions = (el, vm) => {
-  if (!isHtmlElement(el)) return {};
-
-  return entries(attributes).reduce((map, [key, option]) => {
-    const { type, default: defaultValue } = option;
-
-    let value = el.getAttribute(`vue-resize-${key}`);
-
-    value = isUndefined(vm[value]) ? value : vm[value];
-
-    switch (type) {
-      case Number:
-        value = Number(value);
-        value = Number.isNaN(value) ? defaultValue : value;
-        break;
-
-      case Boolean:
-        value = isDefined(value)
-          ? value === "false"
-            ? false
-            : Boolean(value)
-          : defaultValue;
-        break;
-
-      default:
-        value = type(value);
-    }
-    map[key] = value;
-    return map;
-  }, {});
-};
-
 resizeDirective.install = Vue => {
   if (Vue.prototype.$isServer) return;
 
@@ -64,7 +30,12 @@ resizeDirective.install = Vue => {
 
       vnode.isInit = true;
       vnode.elmRect = {};
-      const { delay, type } = getResizeOptions(el, vnode);
+      const { delay, type } = getAttributeMap(
+        el,
+        vnode,
+        attributes,
+        "vue-resize"
+      );
 
       vnode.callback = function() {
         const done = function() {

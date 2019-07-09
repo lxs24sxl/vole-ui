@@ -15,9 +15,9 @@ import VoleUI from 'vole-ui'
 Vue.use(VoleUI)
 ```
 
-## components
+## Components
 
-### resize (directive and component) （[Document](https://github.com/lxs24sxl/vole-ui/blob/master/examples/docs/zh-CN/resize.md)）
+### 1. Resize (directive and component) （[Document](https://github.com/lxs24sxl/vole-ui/blob/master/examples/docs/zh-CN/resize.md)）
 
 ```html
 <template>
@@ -52,6 +52,38 @@ export default class Test extends Vue {
   handleResizeEvent (el, rect, oldRect) {
     this.rect = rect
     this.oldRect = oldRect
+  }
+}
+</script>
+```
+
+
+### 2. Longpress (directive) （[Document](https://github.com/lxs24sxl/vole-ui/blob/master/examples/docs/zh-CN/longpress.md)）
+
+```html
+<template>
+  <div class="test-wrap">
+    <button 
+      v-longpress="handleLongpressEvent"
+      vue-longpress-duration="1000">
+    </button>
+  </div>
+</template>
+
+<script>
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+@Component
+export default class Test extends Vue {
+  options = {
+    endStamp: 1562638917679,
+    rangeOfTime: 1001,
+    startStamp: 1562638916678
+  }
+
+  handleLongpressEvent (options) {
+    this.options = options
   }
 }
 </script>

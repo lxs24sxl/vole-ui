@@ -16,17 +16,6 @@ function VoLongpress(conf = {}) {
 }
 
 /**
- * 初始化指令
- */
-VoLongpress.prototype.init = function(el, binding, vnode) {
-  this.el = el;
-  this.binding = binding;
-  this.vnode = vnode;
-  this.startStamp = 0;
-  this.endStamp = 0;
-};
-
-/**
  * 开始执行事件
  */
 VoLongpress.prototype.start = function() {

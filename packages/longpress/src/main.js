@@ -1,12 +1,28 @@
 import VoLongpress from "./longpress";
 
-let instance = new VoLongpress();
+import { getAttributeMap } from "vole-ui/utils/attributes";
+
+let instance = null;
+
+const attributes = {
+  duration: {
+    type: String,
+    default: 400
+  }
+};
 
 export default {
   name: "Longpress",
 
   bind: (el, binding, vnode) => {
-    instance.init(el, binding, vnode);
+    const { duration } = getAttributeMap(
+      el,
+      vnode,
+      attributes,
+      "vue-longpress"
+    );
+
+    instance = new VoLongpress({ el, binding, vnode, duration });
 
     instance.start();
   },
