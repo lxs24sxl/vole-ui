@@ -20,7 +20,7 @@
     />
     <a @click="handleClickEvent">test</a>
     {{ rect }}
-    <vo-button></vo-button>
+    <button class="test" v-longpress="testLongpress">test</button>
   </div>
 </template>
 
@@ -48,6 +48,9 @@ export default {
     },
     handleClickEvent() {
       this.rerender = !this.rerender;
+    },
+    testLongpress(options) {
+      console.log("test", options);
     }
   }
 };

@@ -1,7 +1,7 @@
 import Resize from "../packages/resize/index.js";
-import VoButton from "../packages/button/index.js";
+import VoLongpress from "../packages/longpress/index.js";
 
-const components = [VoButton];
+const components = [];
 
 const install = function(Vue, opts = {}) {
   components.forEach(component => {
@@ -12,6 +12,7 @@ const install = function(Vue, opts = {}) {
   if (opts) console.log("opts", opts);
 
   Vue.use(Resize);
+  Vue.use(VoLongpress);
 };
 
 /* istanbul ignore if */
@@ -19,11 +20,11 @@ if (typeof window !== "undefined" && window.Vue) {
   install(window.Vue);
 }
 
-export { Resize, VoButton };
+export { Resize, VoLongpress };
 
 export default {
   version: process.env.VERSION,
   install,
   Resize,
-  VoButton
+  VoLongpress
 };
