@@ -40,7 +40,7 @@ module.exports = {
   runtimeCompiler: true,
 
   // 生产环境是否生成 sourceMap 文件
-  productionSourceMap: true,
+  productionSourceMap: false,
 
   // 扩展 webpack 配置，使 packages 加入编译
   chainWebpack: config => {

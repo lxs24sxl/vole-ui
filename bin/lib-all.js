@@ -1,21 +1,22 @@
 
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
-
+const {deleteDir, renameFiles} = require('./file')
 const Components = require('../components.json');
+
+const LIB_PATH = __dirname.replace('bin', 'lib')
 
 /**
  * 格式化组件
  */
 let formatComponentObject = () => {
   let temp = Components;
-  temp['vole-ui'] = 'src/index.js';
+  temp['index'] = 'src/index.js';
   for (let key in temp) {
     temp[key] = temp[key].replace('./', '')
   }
   return temp
 }
-
 
 /**
  * 执行进程任务
@@ -44,33 +45,53 @@ async function syncExex(name = '', path = '') {
 
   result.num = 0;
   result.message = 'fail';
-  return result;
+  return result
 }
 
 /**
  * 跑批量打包命令
  */
-async function runLibComponent() {
-  const shellObject = formatComponentObject();
+function runLibComponent() {
+  return new Promise(async (resolve, reject) => {
 
-  let path = '';
-  let resultList = [];
+    const shellObject = formatComponentObject();
 
-  const shellLen = Object.keys(shellObject).length;
+    let path = '';
+    let resultList = [];
+  
+    const shellLen = Object.keys(shellObject).length;
 
-  for (let name in shellObject) {
-    path = shellObject[name];
-    let result = await syncExex(name, path);
-    resultList.push(result);
-  }
+    for (let name in shellObject) {
+      path = shellObject[name];
+      let result = await syncExex(name, path);
+      resultList.push(result);
+    }
 
-  const success = resultList.filter(item => item.num);
-  const fail = resultList.filter(item => !item.num);
+    const success = resultList.filter(item => item.num);
 
-  console.log("\033[33m");
-  console.table(resultList);
-  console.log("\033[0m");
+    const fail = resultList.filter(item => !item.num);
+  
+    console.log("\033[33m");
+    console.table(resultList);
+    console.log("\033[0m");
+
+    resolve()
+  })
   
 }
 
-runLibComponent()
+/**
+ * 清除所有文件
+ */
+deleteDir(LIB_PATH)
+
+runLibComponent().then(_ => {
+  
+  renameFiles(LIB_PATH, (success, fail) => {
+    console.log("\033[33m");
+    console.table('Rename Files success -> ' + success + ' fail -> ' + fail);
+    console.log("\033[0m");
+  })
+})
+
+
