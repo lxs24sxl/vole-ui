@@ -6,7 +6,7 @@
   "author": "lxs24sxl",
   "email": "lxs24sxl@gmail.com",
   "license": "MIT",
-  "main": "lib/vole-ui.common.js",
+  "main": "lib/index.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -20,7 +20,10 @@
   },
   "keywords": [
     "vole",
+    "vole-ui",
     "lxs24sxl",
+    "resize",
+    "longpress",
     "vue",
     "components"
   ],
