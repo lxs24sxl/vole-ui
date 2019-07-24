@@ -1,10 +1,9 @@
-
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
-const {deleteDir, renameFiles} = require('./file')
+const { deleteDir, renameFiles } = require('./file')
 const Components = require('../components.json');
-
-const LIB_PATH = __dirname.replace('bin', 'lib')
+const { uglifyJSInDir } = require('./uglifyjs');
+const LIB_PATH = __dirname.replace('bin', 'lib');
 
 /**
  * 格式化组件
@@ -58,7 +57,7 @@ function runLibComponent() {
 
     let path = '';
     let resultList = [];
-  
+
     const shellLen = Object.keys(shellObject).length;
 
     for (let name in shellObject) {
@@ -70,14 +69,14 @@ function runLibComponent() {
     const success = resultList.filter(item => item.num);
 
     const fail = resultList.filter(item => !item.num);
-  
+
     console.log("\033[33m");
     console.table(resultList);
     console.log("\033[0m");
 
     resolve()
   })
-  
+
 }
 
 /**
@@ -86,12 +85,19 @@ function runLibComponent() {
 deleteDir(LIB_PATH)
 
 runLibComponent().then(_ => {
-  
+
   renameFiles(LIB_PATH, (success, fail) => {
+
     console.log("\033[33m");
     console.table('Rename Files success -> ' + success + ' fail -> ' + fail);
     console.log("\033[0m");
-  })
-})
 
+    uglifyJSInDir(LIB_PATH, (success, fail) => {
 
+      console.log("\033[33m");
+      console.table('uglifyJS Files success -> ' + success + ' fail -> ' + fail);
+      console.log("\033[0m");
+      
+    });
+  });
+});

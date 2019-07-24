@@ -6,7 +6,7 @@
   "author": "lxs24sxl",
   "email": "lxs24sxl@gmail.com",
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "lib/index.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -46,6 +46,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
+    "uglify-js": "^3.6.0",
     "vue-template-compiler": "^2.6.10"
   }
 }
