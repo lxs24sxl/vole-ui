@@ -7,7 +7,7 @@
   "email": "lxs24sxl@gmail.com",
   "license": "MIT",
   "main": "lib/index.js",
-  "module": "esm/index.js",
+  "module": "lib/esm/index.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
