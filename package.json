@@ -6,13 +6,15 @@
   "author": "lxs24sxl",
   "email": "lxs24sxl@gmail.com",
   "license": "MIT",
-  "main": "lib/index.min.js",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "lib": "vue-cli-service build --target lib --name vole-ui --dest lib src/index.js",
-    "lib:bin": "node ./bin/lib-all.js"
+    "lib:bin": "node ./bin/lib-all.js",
+    "lib:rollup": "node ./bin/rollup-all.js"
   },
   "repository": {
     "type": "git",
@@ -28,15 +30,19 @@
     "components"
   ],
   "bin": {
-    "lib-all": "bin/lib-all.js"
+    "lib-all": "bin/lib-all.js",
+    "rollup-all": "bin/rollup-all.js"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.4.4",
     "core-js": "^2.6.5",
     "resize-observer-polyfill": "^1.5.1",
     "throttle-debounce": "^2.1.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-service": "^3.8.0",
@@ -46,6 +52,12 @@
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.1",
+    "rollup-plugin-vue": "^5.0.1",
     "uglify-js": "^3.6.0",
     "vue-template-compiler": "^2.6.10"
   }

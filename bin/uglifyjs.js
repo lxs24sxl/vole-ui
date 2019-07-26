@@ -1,18 +1,19 @@
+// 改用tarser了
 let UglifyJS = require("uglify-js");
 let fs = require("fs");
 let { fileMap } = require("./file");
 
-const uglifyJSInDir = function (path, cb) {
+const uglifyJSInDir = function(path, cb) {
   let to = null;
   let result = null;
   let success = 0;
   fileMap(path, (type, currentPath, files) => {
     switch (type) {
       case "directory":
+        uglifyJSInDir(currentPath, cb);
         break;
       case "file":
         if (!/\.min\.js/.test(currentPath)) {
-
           to = currentPath.replace(/\.js/, ".min.js");
 
           result = UglifyJS.minify(fs.readFileSync(currentPath, "utf-8"));
@@ -34,7 +35,6 @@ const uglifyJSInDir = function (path, cb) {
         break;
     }
   });
-}
-
+};
 
 this.uglifyJSInDir = uglifyJSInDir;

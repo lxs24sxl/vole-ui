@@ -1,4 +1,4 @@
-import Resize from "../packages/resize/index.js";
+import VoResize from "../packages/resize/index.js";
 import VoLongpress from "../packages/longpress/index.js";
 
 const components = [];
@@ -11,7 +11,7 @@ const install = function(Vue, opts = {}) {
   // eslint-disable-next-line
   if (opts) console.log("opts", opts);
 
-  Vue.use(Resize);
+  Vue.use(VoResize);
   Vue.use(VoLongpress);
 };
 
@@ -20,11 +20,11 @@ if (typeof window !== "undefined" && window.Vue) {
   install(window.Vue);
 }
 
-export { Resize, VoLongpress };
+export { VoResize, VoLongpress };
 
 export default {
   version: process.env.VERSION,
   install,
-  Resize,
+  VoResize,
   VoLongpress
 };
