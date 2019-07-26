@@ -1,4 +1,4 @@
-import { isHtmlElement, isUndefined, isDefined } from "vole-ui/utils/types";
+import { isHtmlElement, isUndefined, isDefined } from "./types";
 
 const entries = obj => {
   return Object.keys(obj || {}).map(key => [key, obj[key]]);

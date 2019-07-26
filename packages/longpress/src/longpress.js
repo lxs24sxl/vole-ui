@@ -1,4 +1,4 @@
-import { on, once, off } from "vole-ui/utils/dom";
+import { on, once, off } from "../../../src/utils/dom";
 
 /**
  * 构造函数

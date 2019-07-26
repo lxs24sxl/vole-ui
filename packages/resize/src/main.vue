@@ -8,7 +8,7 @@
 import {
   addResizeListener,
   removeResizeListener
-} from "vole-ui/utils/resize-event";
+} from "../../../src/utils/resize-event";
 import { throttle, debounce } from "throttle-debounce";
 
 export default {

@@ -1,9 +1,9 @@
 import {
   addResizeListener,
   removeResizeListener
-} from "vole-ui/utils/resize-event";
+} from "../../../src/utils/resize-event";
 
-import { getAttributeMap } from "vole-ui/utils/attributes";
+import { getAttributeMap } from "../../../src/utils/attributes";
 
 import { throttle, debounce } from "throttle-debounce";
 

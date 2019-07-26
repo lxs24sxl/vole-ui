@@ -3,7 +3,7 @@ import App from "./App.vue";
 
 Vue.config.productionTip = false;
 
-import { VoResize, VoLongpress } from "../lib/rollup/index-bundle";
+import { VoResize, VoLongpress } from "../lib/index";
 console.log("VoleUI", VoResize, VoLongpress);
 Vue.use(VoResize);
 Vue.use(VoLongpress);

@@ -1,6 +1,6 @@
 import VoLongpress from "./longpress";
 
-import { getAttributeMap } from "vole-ui/utils/attributes";
+import { getAttributeMap } from "../../../src/utils/attributes";
 
 let instance = null;
 
