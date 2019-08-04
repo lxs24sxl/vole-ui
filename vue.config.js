@@ -30,6 +30,12 @@ let pages = getPages();
 
 module.exports = {
   pages,
+  // pages: {
+  //   index: {
+  //     entry: ENTRY
+  //   }
+  // },
+
   // entry: entry,/
   outputDir: resolve("dist"),
 
@@ -42,8 +48,66 @@ module.exports = {
   // 生产环境是否生成 sourceMap 文件
   productionSourceMap: false,
 
+  // // 配置webpack
+  configureWebpack: () => {
+    const plugins = [];
+
+    if (process.env.BUNDLE_ANALYZER) {
+      const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+        .BundleAnalyzerPlugin;
+      plugins.push(new BundleAnalyzerPlugin());
+    }
+    if (IS_PROD) {
+      return {
+        cache: true,
+
+        plugins: [...plugins],
+
+        performance: {
+          hints: false
+        },
+
+        optimization: {
+          runtimeChunk: IS_PROD ? { name: "manifest" } : false,
+          splitChunks: {
+            automaticNameDelimiter: "--",
+            cacheGroups: {
+              vendors: {
+                name: "vendors",
+                chunks: "initial",
+                test: /[\\/]node_modules[\\/]/,
+                priority: 2,
+                minChunks: 2
+              },
+              "vole-ui": {
+                name: "vole-ui",
+                test: module => /vole-ui/g.test(module.context),
+                chunks: "initial",
+                priority: 7
+              },
+              vue: {
+                name: "vue-common",
+                test: module => /vue|axios/g.test(module.context),
+                chunks: "initial",
+                priority: 8
+              }
+            }
+          }
+        }
+      };
+    }
+  },
+
   // 扩展 webpack 配置，使 packages 加入编译
   chainWebpack: config => {
+    // 移除 prefetch 插件
+    config.plugins.delete("preload");
+    config.plugins.delete("prefetch");
+    Object.keys(pages).forEach(page => {
+      config.plugins.delete(`preload-${page}`);
+      config.plugins.delete(`prefetch-${page}`);
+    });
+
     // examples/docs是存放md文档的地方，也不需要eslint检查
     config.module
       .rule("eslint")

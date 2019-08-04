@@ -6,7 +6,7 @@ import commonjs from "rollup-plugin-commonjs";
 import { terser } from "rollup-plugin-terser";
 export default {
   input: "src/index",
-  
+
   output: {
     file: `lib/index.js`,
     format: "cjs"
@@ -37,6 +37,6 @@ export default {
       extensions: [".js", ".jsx", ".es6", ".es", ".mjs", ".ts"]
     })
   ],
-  
+
   external: ["core-js", "vue", "throttle-debounce", "resize-observer-polyfill"]
 };
